@@ -1,0 +1,40 @@
+function getweather(){
+    let city=document.getElementById("city")
+
+showweather(city.value)
+}
+async function showweather(city){
+    const url = `https://open-weather13.p.rapidapi.com/city?city=${city}&lang=EN`;
+const options = {
+	method: 'GET',
+	headers: {
+		'x-rapidapi-key': 'f570cb2952msh53639550a3441acp177a73jsn58461091888f',
+		'x-rapidapi-host': 'open-weather13.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+
+    if(!response.ok){
+    throw new Error("weather not display")
+
+} 
+	const result = await response.json()
+   getdata(result)
+} catch (error) {
+	console.error(error);
+}
+}
+function getdata(result){
+    let item=document.getElementById('main')
+    item.innerHTML=
+    ` <p>city:${result.name}</p>
+    <p>temperature:${result.main.temp}</p>
+
+    `
+  
+
+
+    
+}
